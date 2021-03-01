@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect } from "react";
+import WebViewer from "@pdftron/webviewer";
+import "./App.css";
 
 function App() {
+  const viewerDiv = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    WebViewer(
+      {
+        path: "lib",
+        initialDoc:
+          "pdf-documents/form-ahca-5000-3008-medical-certification-for-medicaid-long-term-care-services-and-patient-transfer-form.pdf",
+      },
+      viewerDiv.current as HTMLDivElement
+    ).then((instance) => {
+      console.log("Instance: " + instance);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>PDF</h1>
+      <div className="webViewer" ref={viewerDiv}></div>
     </div>
   );
 }
