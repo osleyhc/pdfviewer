@@ -14,7 +14,7 @@ function App() {
       },
       viewerDiv.current as HTMLDivElement
     ).then((instance) => {
-      console.log("Instance: " + instance);
+      console.log(instance);
     });
   }, []);
 
